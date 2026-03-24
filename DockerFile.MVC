@@ -1,0 +1,33 @@
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+
+COPY ["LIS.MVC/LIS.MVC.csproj", "LIS.MVC/"]
+COPY ["API.Consumer/API.Consumer.csproj", "API.Consumer/"]
+COPY ["Modelos_LIS/Modelos_LIS.csproj", "Modelos_LIS/"]
+COPY ["LIS.Servicios/LIS.Servicios.csproj", "LIS.Servicios/"]
+
+
+RUN dotnet restore "LIS.MVC/LIS.MVC.csproj"
+
+
+COPY . .
+
+
+WORKDIR "/src/LIS.MVC"
+RUN dotnet build "LIS.MVC.csproj" -c Release -o /app/build
+
+FROM build AS publish
+# El flag ErrorOnDuplicatePublishOutputFiles=false es CLAVE para evitar el error de los JSON duplicados
+RUN dotnet publish "LIS.MVC.csproj" -c Release -o /app/publish /p:UseAppHost=false /p:ErrorOnDuplicatePublishOutputFiles=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "LIS.MVC.dll"]
