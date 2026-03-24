@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\API.Consumer\API.Consumer.csproj" />
+    <ProjectReference Include="..\LIS.API\LIS.API.csproj" />
+    <ProjectReference Include="..\Modelos_LIS\Modelos_LIS.csproj" />
+  </ItemGroup>
+
+</Project>
