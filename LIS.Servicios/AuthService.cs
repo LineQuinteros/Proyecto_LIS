@@ -57,18 +57,11 @@ namespace LIS.Servicios
 
 
 
-        public async Task<bool> Register(
-            int Id,
-            string med_cedula,
-            string med_nombres,
-            string med_apellidos,
-            string med_telefono,
-            string med_correo,
-            string med_password)
+        public async Task<bool> Register( Medicos medicos)
         {
             //Verificamos duplicados con endpoints específicos
             var usuarioExistente = Crud<Medicos>.GetAll()
-                 .FirstOrDefault(u => u.med_correo == med_correo);
+                 .FirstOrDefault(u => u.med_correo == medicos.med_correo);
 
             if (usuarioExistente != null)
             {
@@ -76,21 +69,11 @@ namespace LIS.Servicios
                 return false;
             }
 
+
             try
             {
-                //CREACIÓN DEL OBJETO USUARIO CON HASH SEGURIDAD
-                var nuevoUsuario = new Medicos
-                {
-                    Id = 0,
-                    med_cedula = med_cedula,
-                    med_nombres = med_nombres,
-                    med_apellidos = med_apellidos,
-                    med_telefono = med_telefono,
-                    med_correo = med_correo,
-                    med_password = med_password
-                };
-
-                Crud<Medicos>.Create(nuevoUsuario);
+               
+                Crud<Medicos>.Create(medicos);
 
                 return true;
             }

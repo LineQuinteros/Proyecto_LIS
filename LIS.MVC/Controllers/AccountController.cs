@@ -60,12 +60,13 @@ namespace Libreria.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string med_cedula, string med_nombres, string med_apellidos, string med_telefono, string med_correo,   string password)
+        public async Task<IActionResult> Register(Medicos medicos)
         {
-             med_correo= med_correo.Trim().ToLower();
+            medicos.med_correo = medicos.med_correo.Trim().ToLower();
+            
 
             var usuario = Crud<Medicos>.GetAll()
-                .FirstOrDefault(usuario => usuario.med_correo.ToLower() == med_correo);
+                .FirstOrDefault(usuario => usuario.med_correo.ToLower() == medicos.med_correo);
 
             if (usuario != null)
             {
@@ -73,7 +74,7 @@ namespace Libreria.MVC.Controllers
                 return View();
             }
 
-            if (await _authService.Register(0,med_cedula,med_nombres, med_apellidos, med_telefono, med_correo, password))
+            if (await _authService.Register(medicos))
             {
                 return RedirectToAction("Index", "Account");
             }

@@ -1,6 +1,6 @@
-﻿@using Modelos_LIS;
+﻿@model Modelos_LIS.Medicos
 @{
-    ViewData["Title"] = "Gestión de Usuarios";
+    ViewData["Title"] = "Registro de Médicos";
 }
 
 <div class="elec-page container mt-4 mb-5">
@@ -9,67 +9,75 @@
             <div class="elec-card shadow-lg">
                 <div class="elec-card-header text-center py-3 border-0">
                     <h3 class="mb-0 text-white fw-bold">
-                        <i class="bi bi-person-plus-fill me-2"></i>Crear Nueva Cuenta
+                        <i class="bi bi-heart-pulse-fill me-2"></i>Nueva Cuenta Médica
                     </h3>
                 </div>
 
                 <div class="elec-card-body p-4 p-md-5">
                     <form asp-action="Register" asp-controller="Account" method="post">
-
+                        
                         <div class="row">
+                            @* --- Columna Izquierda: Datos Personales --- *@
                             <div class="col-md-6 border-end border-secondary pe-md-4">
-                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-person-lines-fill me-2"></i>Datos Personales</h5>
+                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-person-badge me-2"></i>Información Personal</h5>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Cedula</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_cedula" required placeholder="Ej: 1000000000">
+                                    <label class="form-label text-white-50 small fw-bold">Cédula de Identidad</label>
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_cedula" required placeholder="Ej: 1700000000">
                                 </div>
-                                
-                                
+
                                 <div class="mb-3">
                                     <label class="form-label text-white-50 small fw-bold">Nombres</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_nombres" required placeholder="Ej: Juan Alberto">
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_nombres" required placeholder="Juan Alberto">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label text-white-50 small fw-bold">Apellidos</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_apellidos" required placeholder="Ej: Pérez Castro">
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_apellidos" required placeholder="Pérez Castro">
                                 </div>
-
-                                
-                                <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Telefono</label>
-                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_telefono" required placeholder="Ej: 0999999999">
-                                </div>
-
                             </div>
 
+                            @* --- Columna Derecha: Contacto y Especialidad --- *@
                             <div class="col-md-6 ps-md-4 mt-4 mt-md-0">
-                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-card-heading me-2"></i>Identificación de Usuario</h5>
-
-                                
+                                <h5 class="elec-title mb-3 fs-5"><i class="bi bi-telephone-plus me-2"></i>Contacto y Cargo</h5>
 
                                 <div class="mb-3">
-                                    <label class="form-label text-white-50 small fw-bold">Correo Electrónico</label>
-                                    <input type="email" class="form-control elec-form-control rounded-3" name="med_correo" required placeholder="usuario@ejemplo.com">
+                                    <label class="form-label text-white-50 small fw-bold">Teléfono / Celular</label>
+                                    <input type="text" class="form-control elec-form-control rounded-3" name="med_telefono" required placeholder="0999999999">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Especialidad Médica</label>
+                                    @* El 'name' debe ser igual a la propiedad especialidadId *@
+                                    <select class="form-select elec-form-control rounded-3" name="especialidadId" asp-items="ViewBag.Especialidades" required>
+                                        <option value="">-- Seleccione Especialidad --</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label text-white-50 small fw-bold">Correo Institucional</label>
+                                    <input type="email" class="form-control elec-form-control rounded-3" name="med_correo" required placeholder="medico@hospital.com">
                                 </div>
                             </div>
                         </div>
 
                         <hr class="my-4 border-secondary opacity-50">
 
-                        <h5 class="elec-title mb-3 fs-5"><i class="bi bi-shield-lock-fill me-2"></i>Seguridad de la Cuenta</h5>
+                        @* --- Sección Seguridad --- *@
+                        <h5 class="elec-title mb-3 fs-5"><i class="bi bi-shield-lock-fill me-2"></i>Seguridad</h5>
 
                         <div class="row justify-content-center">
-                            <div class="col-md-8 mb-3">
-                                <label class="form-label text-white-50 small fw-bold">Contraseña</label>
-                                <input type="password" class="form-control elec-form-control rounded-3" name="password" required placeholder="Mínimo 8 caracteres">
+                            <div class="col-md-8 mb-3 text-center">
+                                <label class="form-label text-white-50 small fw-bold">Contraseña de Acceso</label>
+                                @* Usamos 'password' para que el controlador lo reciba por separado *@
+                                <input type="password" class="form-control elec-form-control rounded-3 text-center" name="med_password" required placeholder="Mínimo 8 caracteres">
+                                <small class="text-muted">Se encriptará mediante BCrypt al guardar.</small>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn elec-btn elec-btn-primary btn-lg rounded-3 fw-bold shadow-sm">
-                                <i class="bi bi-person-check-fill me-2"></i>Crear Usuario
+                                <i class="bi bi-check-circle-fill me-2"></i>Finalizar Registro
                             </button>
                             <a asp-action="Index" asp-controller="Home" class="btn elec-btn elec-btn-secondary rounded-3">
                                 Cancelar
@@ -79,7 +87,7 @@
                         @if (ViewBag.ErrorMessage != null)
                         {
                             <div class="alert elec-alert elec-alert-danger mt-3 text-center border-0 shadow-sm">
-                                <i class="bi bi-exclamation-octagon-fill me-2"></i>@ViewBag.ErrorMessage
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>@ViewBag.ErrorMessage
                             </div>
                         }
                     </form>

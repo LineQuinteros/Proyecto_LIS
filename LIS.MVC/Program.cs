@@ -4,6 +4,8 @@ using LIS.Servicios.Interfaces;
 using LIS.Servicios;
 
 Crud<Medicos>.EndPoint = "http://localhost:5135/api/Medicos";
+Crud<Especialidades>.EndPoint = "http://localhost:5135/api/Especialidades";
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +42,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Account}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
