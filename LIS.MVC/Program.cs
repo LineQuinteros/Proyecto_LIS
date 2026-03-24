@@ -3,8 +3,8 @@ using Modelos_LIS;
 using LIS.Servicios.Interfaces;
 using LIS.Servicios;
 
-Crud<Medicos>.EndPoint = "http://localhost:5135/api/Medicos";
-Crud<Especialidades>.EndPoint = "http://localhost:5135/api/Especialidades";
+Crud<Medicos>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Medicos";
+Crud<Especialidades>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Especialidades";
 
 
 var builder = WebApplication.CreateBuilder(args);
