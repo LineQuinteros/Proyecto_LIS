@@ -9,6 +9,7 @@ namespace Modelos_LIS
     public class Ordenes
     {
         [Key] public int Id { get; set; }
+        [Display(Name = "FECHA")]
         public DateTime orden_fecha { get; set; }
         public bool orden_estado { get; set; }
 

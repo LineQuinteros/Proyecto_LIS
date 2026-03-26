@@ -1,64 +1,166 @@
 ﻿@model IEnumerable<Modelos_LIS.Examenes>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Catálogo de Exámenes";
 }
 
-<div class="container mt-4">
-    <h1 class="text-primary fw-bold mb-4">Catálogo de Exámenes</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="titulo-dorado-premium">Catálogo de Exámenes</h1>
+            </div>
+            <a asp-action="Create" class="btn-luxury">
+                <span>+ NUEVO REGISTRO</span>
+            </a>
+        </header>
 
-    <p>
-        <a asp-action="Create" class="btn btn-primary rounded-pill px-4 shadow-sm">
-            + Crear Nuevo Examen
-        </a>
-    </p>
-
-    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light">
-                <tr>
-                    <th class="ps-4">@Html.DisplayNameFor(model => model.Id)</th>
-                    <th>@Html.DisplayNameFor(model => model.exam_nombre)</th>
-                    <th>@Html.DisplayNameFor(model => model.exam_unidad)</th>
-                    <th>@Html.DisplayNameFor(model => model.exam_referencia)</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <div class="glass-card shadow-lg">
+            <table class="table table-hover mb-0">
+                <thead>
                     <tr>
-                        <td class="ps-4">
-                            <span class="badge bg-light text-dark border">@Html.DisplayFor(modelItem => item.Id)</span>
-                        </td>
-                        <td class="fw-bold">
-                            @Html.DisplayFor(modelItem => item.exam_nombre)
-                        </td>
-                        <td class="text-primary">
-                            @Html.DisplayFor(modelItem => item.exam_unidad)
-                        </td>
-                        <td class="text-muted small">
-                            @Html.DisplayFor(modelItem => item.exam_referencia)
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-sm btn-outline-primary">Editar</a>
-                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-sm btn-outline-secondary">Ver</a>
-                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-sm btn-outline-danger">Borrar</a>
-                            </div>
-                        </td>
+                        <th class="py-4 ps-4">@Html.DisplayNameFor(model => model.Id)</th>
+                        <th class="py-4">@Html.DisplayNameFor(model => model.exam_nombre)</th>
+                        <th class="py-4">@Html.DisplayNameFor(model => model.exam_unidad)</th>
+                        <th class="py-4">@Html.DisplayNameFor(model => model.exam_referencia)</th>
+                        <th class="py-4 text-end pe-4">GESTIÓN</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="luxury-row">
+                            <td class="ps-4">
+                                <span class="id-tag-small">#@item.Id</span>
+                            </td>
+                            <td>
+                                <div class="espe-nombre-refined">@item.exam_nombre</div>
+                            </td>
+                            <td>
+                                <div class="text-primary small fw-semibold">
+                                    @item.exam_unidad
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-muted small text-truncate" style="max-width: 250px;">
+                                    @item.exam_referencia
+                                </div>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="action-links">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="link-edit">Editar</a>
+                                    <a href="@Url.Action("Details", new { id = item.Id })" class="link-view">Ver</a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="link-delete">Borrar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <style>
-    
+    /* Importación de fuentes: Montserrat (Cuerpo) y Playfair (Título) */
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+        /* Mantenemos tu fondo azul/celeste clínico */
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    /* TÍTULO: Dorado Champagne Gold con Playfair Display */
+    .titulo-dorado-premium {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.8rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
+    }
+
+    /* Tamaños ajustados (Un punto menos) */
+    .id-tag-small {
+        color: #b59410;
+        font-weight: 700;
+        font-size: 0.8rem; /* Tamaño reducido */
+    }
+
+    .espe-nombre-refined {
+        font-weight: 700;
+        color: #1a237e;
+        font-size: 1.1rem; /* Tamaño reducido */
+    }
+
+    /* Card Glassmorphism */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    /* Fila con borde dorado al hacer hover */
+    .luxury-row {
+        transition: all 0.3s ease;
+        border-left: 5px solid transparent;
+    }
+
+    .luxury-row:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-left: 5px solid #b59410;
+        transform: translateX(5px);
+    }
+
+    /* Encabezados de tabla */
     .table thead th {
-        font-size: 0.85rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        padding: 15px;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: #64748b;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Acciones: Texto limpio sin recuadros */
+    .action-links a {
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 15px;
+        text-transform: uppercase;
+        transition: opacity 0.2s;
+    }
+
+    .link-edit { color: #3b82f6; }
+    .link-view { color: #64748b; }
+    .link-delete { color: #ef4444; }
+
+    /* Botón de Registro Redondeado (Estilo Montserrat) */
+    .btn-luxury {
+        background: #1a237e;
+        color: white;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-luxury:hover {
+        background: #0d124d;
+        color: white;
+        transform: translateY(-2px);
     }
 </style>

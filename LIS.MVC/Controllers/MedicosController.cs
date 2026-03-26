@@ -100,7 +100,7 @@ namespace LIS.MVC.Controllers
         // GET: MedicosController/Delete/5
         public ActionResult Delete(int id)
         {
-            var medico = Crud<Ordenes>.GetById(id);
+            var medico = Crud<Medicos>.GetById(id);
 
             if (medico == null)
             {
@@ -117,7 +117,7 @@ namespace LIS.MVC.Controllers
         {
             try
             {
-                Crud<Ordenes>.Delete(id);
+                Crud<Medicos>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

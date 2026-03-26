@@ -1,68 +1,109 @@
 ﻿@model Modelos_LIS.Medicos
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Registro";
 }
 
-<h1>Delete</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Eliminar Registro</h1>
+            <p class="text-danger fw-bold mt-3">¿Estás segura de que deseas eliminar permanentemente a este médico?</p>
+        </header>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Medicos</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_cedula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_cedula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_nombres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_nombres)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_apellidos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_apellidos)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_correo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_correo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_password)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.especialidadId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.especialidadId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        <div class="glass-card shadow-lg p-5 mx-auto" style="max-width: 700px;">
+            <div class="text-center mb-4">
+                <span class="id-tag-small">ID MÉDICO: #@Model.Id</span>
+                <h2 class="espe-nombre-refined mt-2">@Model.med_nombres @Model.med_apellidos</h2>
+            </div>
+
+            <div class="row info-grid mt-4">
+                <div class="col-6 mb-3">
+                    <label class="text-uppercase tiny fw-bold text-muted">Cédula</label>
+                    <p class="fw-semibold">@Model.med_cedula</p>
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="text-uppercase tiny fw-bold text-muted">Teléfono</label>
+                    <p class="fw-semibold">@Model.med_telefono</p>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="text-uppercase tiny fw-bold text-muted">Correo Electrónico</label>
+                    <p class="fw-semibold">@Model.med_correo</p>
+                </div>
+            </div>
+
+            <hr class="my-4" style="opacity: 0.1;">
+
+            <form asp-action="Delete" class="d-flex justify-content-center gap-3">
+                <input type="hidden" asp-for="Id" />
+                <a asp-action="Index" class="btn-cancelar">REGRESAR</a>
+                <button type="submit" class="btn-eliminar">CONFIRMAR ELIMINACIÓN</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    /* EL AZUL OSCURO BONITO (Estilo Times) */
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        color: #1a237e; /* Azul Imperial Profundo */
+        font-weight: 700;
+        letter-spacing: -1px;
+        margin: 0;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .id-tag-small { color: #b59410; font-weight: 700; font-size: 0.8rem; }
+    
+    .espe-nombre-refined { 
+        color: #1a237e; 
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    .tiny { font-size: 0.65rem; letter-spacing: 1px; }
+
+    /* Botones */
+    .btn-eliminar {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        transition: all 0.3s;
+    }
+
+    .btn-cancelar {
+        background: #64748b;
+        color: white;
+        text-decoration: none;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    .btn-eliminar:hover { background: #dc2626; transform: translateY(-2px); }
+    .btn-cancelar:hover { background: #475569; color: white; }
+</style>

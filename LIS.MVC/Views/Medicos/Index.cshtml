@@ -1,77 +1,172 @@
 ﻿@model IEnumerable<Modelos_LIS.Medicos>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Directorio Médico";
 }
 
-<h1>Index</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="titulo-dorado-premium">Cuerpo Médico</h1>
+            </div>
+            <a asp-action="Create" class="btn-luxury">
+                <span>+ NUEVO REGISTRO</span>
+            </a>
+        </header>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_cedula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_nombres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_apellidos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_correo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.med_password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.especialidadId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.med_password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.especialidadId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <div class="glass-card shadow-lg">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="py-4 ps-4">@Html.DisplayNameFor(model => model.Id)</th>
+                        <th class="py-4">Cédula</th>
+                        <th class="py-4">Nombres</th>
+                        <th class="py-4">Apellidos</th>
+                        <th class="py-4">Contacto</th>
+                        <th class="py-4">Especialidad</th>
+                        <th class="py-4 text-end pe-4">GESTIÓN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="luxury-row">
+                            <td class="ps-4">
+                                <span class="id-tag-small">#@item.Id</span>
+                            </td>
+                            <td>
+                                <div class="text-muted small fw-bold">@item.med_cedula</div>
+                            </td>
+                            <td>
+                                <div class="espe-nombre-refined">@item.med_nombres</div>
+                            </td>
+                            <td>
+                                <div class="espe-nombre-refined">@item.med_apellidos</div>
+                            </td>
+                            <td>
+                                <div class="text-dark small">@item.med_telefono</div>
+                                <div class="text-muted tiny">@item.med_correo</div>
+                            </td>
+                            <td>
+                                <span class="badge-especialidad"> @item.Especialidad.espe_nombre</span>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="action-links">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="link-edit">Editar</a>
+                                    <a href="@Url.Action("Details", new { id = item.Id })" class="link-view">Ver</a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="link-delete">Borrar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Importación de fuentes */
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    /* TÍTULO: Champagne Gold */
+    .titulo-dorado-premium {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.8rem;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
+    }
+
+    /* Tamaños ajustados (Un punto menos) */
+    .id-tag-small {
+        color: #b59410;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .espe-nombre-refined {
+        font-weight: 700;
+        color: #1a237e;
+        font-size: 1.1rem;
+    }
+
+    .tiny { font-size: 0.7rem; }
+
+    /* Estilo para la Especialidad */
+    .badge-especialidad {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        background: rgba(26, 35, 126, 0.05);
+        color: #1a237e;
+        font-weight: 600;
+        border: 1px solid rgba(26, 35, 126, 0.1);
+    }
+
+    /* Card Glassmorphism */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .luxury-row {
+        transition: all 0.3s ease;
+        border-left: 5px solid transparent;
+    }
+
+    .luxury-row:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-left: 5px solid #b59410;
+        transform: translateX(5px);
+    }
+
+    .table thead th {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        color: #64748b;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .action-links a {
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 15px;
+        text-transform: uppercase;
+    }
+
+    .link-edit { color: #3b82f6; }
+    .link-view { color: #64748b; }
+    .link-delete { color: #ef4444; }
+
+    .btn-luxury {
+        background: #1a237e;
+        color: white;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+    }
+</style>
