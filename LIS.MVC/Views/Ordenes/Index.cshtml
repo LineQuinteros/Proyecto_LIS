@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.orden_estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MedicoId)
+                @Html.DisplayFor(modelItem => item.Medico.med_nombres)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PacienteId)
+                @Html.DisplayFor(modelItem => item.Paciente.pac_nombres)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
