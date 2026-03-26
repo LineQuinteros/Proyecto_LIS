@@ -9,8 +9,11 @@ namespace Modelos_LIS
     {
 
         [Key] public int Id     { get; set; }
+        [Display(Name = "Nombre del Examen")]
         public string exam_nombre { get; set; }
+        [Display(Name = "Unidades")]
         public string exam_unidad { get; set; }
+        [Display(Name = "Referencia del Examen")]
         public string exam_referencia { get; set; }
 
 
