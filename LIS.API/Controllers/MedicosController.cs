@@ -29,6 +29,9 @@ namespace LIS.API.Controllers
         {
             var medicos = await _context.Medicos.Include(m => m.Especialidad).ToListAsync();
             return medicos;
+
+
+            
         }
 
         // GET: api/Medicos/5

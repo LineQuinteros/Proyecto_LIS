@@ -2,6 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using LIS.API.Data;
 
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<LISAPIContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("LIS_Render") ?? throw new InvalidOperationException("Connection string 'LISAPIContext' not found.")));

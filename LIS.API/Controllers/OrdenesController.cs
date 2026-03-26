@@ -25,7 +25,10 @@ namespace LIS.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ordenes>>> GetOrdenes()
         {
-            return await _context.Ordenes.ToListAsync();
+            return await _context.Ordenes
+                .Include(o => o.Medico)
+                .Include(o => o.Paciente)
+                .ToListAsync();
         }
 
         // GET: api/Ordenes/5

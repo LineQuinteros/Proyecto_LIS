@@ -6,105 +6,105 @@ using Modelos_LIS;
 
 namespace LIS.MVC.Controllers
 {
-    public class EspecialidadesController : Controller
+    [Authorize]
+    public class PacientesController : Controller
     {
-        [Authorize]
-        // GET: EspecialidadesController
+        // GET: PacientesController
         public ActionResult Index()
         {
-            var especialidad = Crud<Especialidades>.GetAll();
-            return View(especialidad);
+            var paciente = Crud<Pacientes>.GetAll();
+            return View(paciente);
         }
 
-        // GET: EspecialidadesController/Details/5
+        // GET: PacientesController/Details/5
         public ActionResult Details(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var paciente = Crud<Pacientes>.GetById(id);
+            if (paciente == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(paciente);
         }
 
-        // GET: EspecialidadesController/Create
+        // GET: PacientesController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EspecialidadesController/Create
+        // POST: PacientesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Especialidades especialidad)
+        public ActionResult Create(Pacientes paciente)
         {
             try
             {
-                Crud<Especialidades>.Create(especialidad);
+                Crud<Pacientes>.Create(paciente);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(paciente);
             }
         }
 
-        // GET: EspecialidadesController/Edit/5
+        // GET: PacientesController/Edit/5
         public ActionResult Edit(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var paciente = Crud<Pacientes>.GetById(id);
+            if (paciente == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(paciente);
         }
 
-        // POST: EspecialidadesController/Edit/5
+        // POST: PacientesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Especialidades especialidad)
+        public ActionResult Edit(int id, Pacientes paciente)
         {
             try
             {
-                Crud<Especialidades>.Update(id, especialidad);
+                Crud<Pacientes>.Update(id, paciente);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(paciente);
             }
         }
-        
 
-        // GET: EspecialidadesController/Delete/5
+        // GET: PacientesController/Delete/5
         public ActionResult Delete(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var paciente = Crud<Pacientes>.GetById(id);
+            if (paciente == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(paciente);
         }
 
-        // POST: EspecialidadesController/Delete/5
+        // POST: PacientesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Especialidades especialidad)
+        public ActionResult Delete(int id, Pacientes paciente)
         {
             try
             {
-                Crud<Especialidades>.Delete(id);
+                Crud<Pacientes>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(paciente);
             }
+        
         }
     }
 }

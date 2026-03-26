@@ -1,55 +1,171 @@
 ﻿@{
     ViewData["Title"] = "Iniciar Sesión";
 }
-<br />
-<br />
-<br />
-<div class="row justify-content-center align-items-center elec-page" style="min-height: 80vh;">
-    <div class="col-md-5 col-lg-4">
-        <div class="elec-card shadow-lg">
-            <div class="elec-card-header text-center pt-4 pb-2 border-0 bg-transparent">
-                <i class="bi bi-shield-lock-fill text-primary" style="font-size: 3rem;"></i>
-                <h2 class="elec-title mt-3 mb-1">Sistema de Libreria</h2>
-                <p class="text-white-50 small">Ingrese sus credenciales para continuar</p>
+
+<style>
+    /* Fondo para toda la página de Login */
+    .elec-page {
+        /*Degradado*/
+        background: radial-gradient(circle, #0c2049,#0a368c,#c6e2ff);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Estilo para la Tarjeta de Login  */
+    .elec-card {
+        background-color: #ffffff; 
+        border-radius: 20px;
+        border: none;
+        overflow: hidden; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25); 
+    }
+
+    /*  Encabezado de la Tarjeta  */
+    .elec-card-header {
+        background-color: #0056b3; 
+        color: white; 
+        padding: 2.5rem 2rem 1.5rem !important;
+        text-align: center;
+    }
+
+    /*  títulos dentro del header */
+    .elec-title {
+        font-weight: 800;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        color: white; 
+    }
+
+    /* "Inicio de Sesión" */
+    .subtitle-login {
+        color: rgba(255, 255, 255, 0.7); 
+        font-weight: bold;
+        text-uppercase;
+        letter-spacing: 3px;
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Cuerpo de la Tarjeta  */
+    .elec-card-body {
+        padding: 2.5rem;
+    }
+
+    /*  inputs */
+    .elec-form-control {
+        border-radius: 10px;
+        border: 1px solid #ced4da; 
+        padding: 0.75rem 1rem; 
+        transition: all 0.2s;
+    }
+
+       
+
+    /* 9. Estilo para las etiquetas (label) de los inputs */
+    .form-label-lab {
+        color: #495057; 
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Botón de Ingresar */
+    .elec-btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff;
+        color: white;
+        border-radius: 10px; 
+        padding: 10px;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: background-color 0.2s;
+    }
+
+
+    /* pie de página de la tarjeta */
+    .card-footer-lab {
+        background-color: #f8f9fa; 
+        border-top: 1px solid #dee2e6; 
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    /* error */
+    .elec-alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 0.85rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="elec-page">
+    <div class="col-md-6 col-lg-5 col-xl-4">
+        
+        <div class="elec-card">
+            
+            <div class="elec-card-header">
+                
+                <p class="subtitle-login">Inicio de Sesión</p>
+                
+                <i class="bi bi-shield-lock-fill text-white" style="font-size: 3rem; opacity: 0.9;"></i>
+                
+                <h2 class="elec-title">Laboratory Information System</h2>
+                
+                <p class="small text-white" style="opacity: 0.7;">Ingrese sus credenciales para continuar</p>
             </div>
 
-            <div class="elec-card-body p-4">
+            <div class="elec-card-body">
                 <form asp-action="Login" asp-controller="Account" method="post">
+                    
                     <div class="mb-4">
-                        <label class="form-label text-white small fw-bold">
-                            <i class="bi bi-envelope me-1"></i>Correo Electrónico
+                        <label class="form-label-lab">
+                            <i class="bi bi-envelope me-2 text-primary"></i>Correo Electrónico
                         </label>
-                        <input type="email" class="form-control elec-form-control rounded-3"
+                        <input type="email" class="form-control elec-form-control"
                                name="email" required placeholder="nombre@correo.com">
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label text-white small fw-bold">
-                            <i class="bi bi-key me-1"></i>Contraseña
+                        <label class="form-label-lab">
+                            <i class="bi bi-key me-2 text-primary"></i>Contraseña
                         </label>
-                        <input type="password" class="form-control elec-form-control rounded-3"
+                        <input type="password" class="form-control elec-form-control"
                                name="password" required placeholder="********">
                     </div>
 
-                    <button type="submit" class="btn elec-btn elec-btn-primary w-100 py-2 fw-bold rounded-3 mb-3">
+                    <button type="submit" class="btn elec-btn-primary w-100 py-2">
                         <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar al Sistema
                     </button>
 
                     @if (ViewBag.ErrorMessage != null)
                     {
-                        <div class="alert elec-alert elec-alert-danger text-center py-2 border-0 small mb-0">
+                        <div class="alert elec-alert-danger text-center">
                             <i class="bi bi-exclamation-triangle-fill me-2"></i>@ViewBag.ErrorMessage
                         </div>
                     }
                 </form>
             </div>
 
-            <div class="card-footer text-center border-top border-secondary bg-transparent py-3">
-                <p class="text-white-50 small mb-1">¿Aún no tienes cuenta?</p>
-                <a asp-action="Register" asp-controller="Account" class="text-info fw-bold text-decoration-none small">
+            <div class="card-footer-lab">
+                <p class="small text-muted mb-1">¿Aún no tienes cuenta?</p>
+                <a asp-action="Register" asp-controller="Account" class="text-primary fw-bold text-decoration-none small">
                     <i class="bi bi-person-plus me-1"></i>Regístrate aquí
                 </a>
             </div>
+            
         </div>
+        
     </div>
 </div>

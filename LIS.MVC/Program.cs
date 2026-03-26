@@ -5,6 +5,11 @@ using LIS.Servicios;
 
 Crud<Medicos>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Medicos";
 Crud<Especialidades>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Especialidades";
+Crud<Examenes>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Examenes";
+Crud<Pacientes>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Pacientes";
+Crud<Ordenes>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Ordenes";
+Crud<Resultados>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Resultados";
+Crud<Medicos>.EndPoint = "https://proyecto-lis-1.onrender.com/api/Medicos";
 
 
 var builder = WebApplication.CreateBuilder(args);

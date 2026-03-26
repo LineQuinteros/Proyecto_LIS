@@ -6,104 +6,103 @@ using Modelos_LIS;
 
 namespace LIS.MVC.Controllers
 {
-    public class EspecialidadesController : Controller
+    public class ExamenesController : Controller
     {
         [Authorize]
-        // GET: EspecialidadesController
+        // GET: ExamenesController
         public ActionResult Index()
         {
-            var especialidad = Crud<Especialidades>.GetAll();
-            return View(especialidad);
+            var examen = Crud<Examenes>.GetAll();
+            return View(examen);
         }
 
-        // GET: EspecialidadesController/Details/5
+        // GET: ExamenesController/Details/5
         public ActionResult Details(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var examen = Crud<Examenes>.GetById(id);
+            if (examen == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(examen);
         }
 
-        // GET: EspecialidadesController/Create
+        // GET: ExamenesController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EspecialidadesController/Create
+        // POST: ExamenesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Especialidades especialidad)
+        public ActionResult Create(Examenes examen)
         {
             try
             {
-                Crud<Especialidades>.Create(especialidad);
+                Crud<Examenes>.Create(examen);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(examen);
             }
         }
 
-        // GET: EspecialidadesController/Edit/5
+        // GET: ExamenesController/Edit/5
         public ActionResult Edit(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var examen = Crud<Examenes>.GetById(id);
+            if (examen == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(examen);
         }
 
-        // POST: EspecialidadesController/Edit/5
+        // POST: ExamenesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Especialidades especialidad)
+        public ActionResult Edit(int id, Examenes examen)
         {
             try
             {
-                Crud<Especialidades>.Update(id, especialidad);
+                Crud<Examenes>.Update(id, examen);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(examen);
             }
         }
-        
 
-        // GET: EspecialidadesController/Delete/5
+        // GET: ExamenesController/Delete/5
         public ActionResult Delete(int id)
         {
-            var especialidad = Crud<Especialidades>.GetById(id);
-            if (especialidad == null)
+            var examen = Crud<Examenes>.GetById(id);
+            if (examen == null)
             {
                 return NotFound();
             }
-            return View(especialidad);
+            return View(examen);
         }
 
-        // POST: EspecialidadesController/Delete/5
+        // POST: ExamenesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Especialidades especialidad)
+        public ActionResult Delete(int id, Examenes examen)
         {
             try
             {
-                Crud<Especialidades>.Delete(id);
+                Crud<Examenes>.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(especialidad);
+                return View(examen);
             }
         }
     }

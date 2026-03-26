@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Modelos_LIS.Resultados>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orden.Paciente.pac_cedula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Examen.exam_nombre)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.res_valor)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Examen.exam_referencia)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.res_comentario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrdenId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamenId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Orden.Paciente.pac_cedula)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Examen.exam_nombre)
+                </td>
+                
+            <td>
+                @Html.DisplayFor(modelItem => item.res_valor)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Examen.exam_referencia)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.res_comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExamenId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
