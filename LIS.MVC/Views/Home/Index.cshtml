@@ -2,46 +2,103 @@
     ViewData["Title"] = "Inicio - LIS";
 }
 
-<div class="row min-vh-100 align-items-center shadow-lg"
-     style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url('@Url.Content("~/images/fondo-lab.jpg")');
-    background-size: cover;
-    background-position: center;
-    margin-top: -24px; /* Esto es para pegar la imagen al menú de arriba */
-    border-radius: 0 0 50px 50px;">
-    <div class="col-12 text-center text-white p-5">
-        
-        
-        
-        <h1 class="display-2 fw-bold mb-4" style="letter-spacing: 2px;">
-             <span class="text-info">Laboratory Information System</span>
-        </h1>
-        
-        <p class="fs-3 fw-light mb-5 mx-auto" style="max-width: 800px;">
-            Gestión de Laboratorio Clínico.
+<div class="hero-wrapper">
+    <div class="hero-section">
+        <div class="content-overlay">
+            <h1 class="display-2 fw-bold mb-4 titulo-principal">
+                Laboratory Information System
+            </h1>
             
-        </p>
+            <p class="fs-3 fw-light mb-5 text-subtitle">
+                Gestión de Laboratorio Clínico de Alto Nivel.
+            </p>
 
-        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <a asp-controller="Account" asp-action="Index"
-                       class="btn btn-info btn-lg px-5 py-3 fw-bold rounded-pill shadow">
-                    INGRESAR AL SISTEMA
-                </a>
-            }
-            else
-            {
-                <a asp-controller="Ordenes" asp-action="Index"
-                       class="btn btn-info btn-lg px-5 py-3 fw-bold rounded-pill shadow">
-                    ÓRDENES
-                </a>
-                <a asp-controller="Pacientes" asp-action="Index"
-                       class="btn btn-outline-light btn-lg px-5 py-3 fw-bold rounded-pill">
-                    PACIENTES
-                </a>
-            }
+            <div class="button-group">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Index" class="btn-premium">
+                        INGRESAR AL SISTEMA
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Ordenes" asp-action="Index" class="btn-premium">
+                        GESTIONAR ÓRDENES
+                    </a>
+                    <a asp-controller="Pacientes" asp-action="Index" class="btn-outline-premium">
+                        REGISTRO DE PACIENTES
+                    </a>
+                }
+            </div>
         </div>
     </div>
 </div>
 
+<style>
+    /* 1. ROMPER EL CONTENEDOR: Este es el truco clave */
+    .hero-wrapper {
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        position: relative;
+    }
+
+    .hero-section {
+        min-height: 100vh;
+        background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('@Url.Content("~/images/fondo-lab.jpg")');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -24px; /* Ajuste para pegar al navbar */
+    }
+
+    /* 2. ESTILO PREMIUM (Tipografía similar a tus capturas) */
+    .titulo-principal {
+        font-family: 'Playfair Display', serif;
+        color: #80d8ff; /* El azul claro que se ve en tu imagen */
+        text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .text-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        color: rgba(255,255,255,0.9);
+    }
+
+    /* 3. BOTONES MODERNOS */
+    .btn-premium {
+        background: #1a237e;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: all 0.3s;
+        display: inline-block;
+        border: none;
+    }
+
+    .btn-outline-premium {
+        background: transparent;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 2px solid white;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+        .btn-premium:hover, .btn-outline-premium:hover {
+            transform: translateY(-3px);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+    /* Evitar scroll horizontal */
+    body {
+        overflow-x: hidden;
+    }
+</style>

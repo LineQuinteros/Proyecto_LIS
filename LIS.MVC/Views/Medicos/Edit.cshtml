@@ -1,65 +1,169 @@
 ﻿@model Modelos_LIS.Medicos
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Médico";
 }
 
-<h1>Edit</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Actualizar Información</h1>
+            <p class="text-muted fw-bold">Modifique los datos del profesional sanitario</p>
+        </header>
 
-<h4>Medicos</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="med_cedula" class="control-label"></label>
-                <input asp-for="med_cedula" class="form-control" />
-                <span asp-validation-for="med_cedula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="med_nombres" class="control-label"></label>
-                <input asp-for="med_nombres" class="form-control" />
-                <span asp-validation-for="med_nombres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="med_apellidos" class="control-label"></label>
-                <input asp-for="med_apellidos" class="form-control" />
-                <span asp-validation-for="med_apellidos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="med_telefono" class="control-label"></label>
-                <input asp-for="med_telefono" class="form-control" />
-                <span asp-validation-for="med_telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="med_correo" class="control-label"></label>
-                <input asp-for="med_correo" class="form-control" />
-                <span asp-validation-for="med_correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="med_password" class="control-label"></label>
-                <input asp-for="med_password" class="form-control" />
-                <span asp-validation-for="med_password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="especialidadId" class="control-label"></label>
-                <select asp-for="especialidadId" class="form-control" asp-items="ViewBag.Especialidades">
-                    <option value="">-- Seleccione una especialidad --</option>
-                </select>
-                <span asp-validation-for="especialidadId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <div class="glass-card shadow-lg p-5 mx-auto" style="max-width: 900px;">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert-error-luxury mb-4"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="med_cedula" class="label-premium"><i class="bi bi-card-text me-2"></i>CÉDULA</label>
+                            <input asp-for="med_cedula" class="input-luxury" placeholder="100xxxxxxx" />
+                            <span asp-validation-for="med_cedula" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="med_nombres" class="label-premium"><i class="bi bi-person me-2"></i>NOMBRES</label>
+                            <input asp-for="med_nombres" class="input-luxury" />
+                            <span asp-validation-for="med_nombres" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="med_apellidos" class="label-premium"><i class="bi bi-person-check me-2"></i>APELLIDOS</label>
+                            <input asp-for="med_apellidos" class="input-luxury" />
+                            <span asp-validation-for="med_apellidos" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="med_telefono" class="label-premium"><i class="bi bi-telephone me-2"></i>TELÉFONO</label>
+                            <input asp-for="med_telefono" class="input-luxury" />
+                            <span asp-validation-for="med_telefono" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="med_correo" class="label-premium"><i class="bi bi-envelope me-2"></i>CORREO</label>
+                            <input asp-for="med_correo" class="input-luxury" />
+                            <span asp-validation-for="med_correo" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group-luxury mb-4">
+                            <label asp-for="especialidadId" class="label-premium"><i class="bi bi-stethoscope me-2"></i>ESPECIALIDAD</label>
+                            <select asp-for="especialidadId" class="input-luxury" asp-items="ViewBag.Especialidades">
+                                <option value="">-- Seleccione una especialidad --</option>
+                            </select>
+                            <span asp-validation-for="especialidadId" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-5">
+                        <div class="form-group-luxury">
+                            <label asp-for="med_password" class="label-premium"><i class="bi bi-lock me-2"></i>CONTRASEÑA DE ACCESO</label>
+                            <input asp-for="med_password" type="password" class="input-luxury" />
+                            <span asp-validation-for="med_password" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn-cancelar">REGRESAR</a>
+                    <button type="submit" class="btn-guardar">GUARDAR CAMBIOS</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    body {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        color: #1a237e;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .label-premium {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .input-luxury {
+        width: 100%;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .input-luxury:focus {
+        border-color: #1a237e;
+        outline: none;
+        box-shadow: 0 0 10px rgba(26, 35, 126, 0.1);
+    }
+
+    .btn-guardar {
+        background: #1a237e;
+        color: white;
+        border: none;
+        padding: 12px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        transition: all 0.3s;
+    }
+
+    .btn-cancelar {
+        background: #64748b;
+        color: white;
+        text-decoration: none;
+        padding: 12px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+
+    .btn-guardar:hover { background: #0d124d; transform: translateY(-2px); }
+    .btn-cancelar:hover { background: #475569; color: white; }
+
+    .alert-error-luxury {
+        background: #fff5f5;
+        color: #c53030;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        border-left: 5px solid #c53030;
+    }
+</style>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

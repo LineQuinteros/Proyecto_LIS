@@ -20,9 +20,24 @@ namespace LIS.MVC.Controllers
         // GET: OrdenesController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
+            var orden = Crud<Ordenes>.GetById(id);
+            if (orden == null) return NotFound();
 
+            // Buscamos los datos adicionales usando los IDs de la orden
+            var medico = Crud<Medicos>.GetById(orden.MedicoId);
+            var paciente = Crud<Pacientes>.GetById(orden.PacienteId);
+
+            // Guardamos el nombre completo (Nombres + Apellidos)
+            ViewBag.NombreCompletoMedico = (medico != null)
+                ? $"{medico.med_nombres} {medico.med_apellidos}"
+                : "Médico no encontrado";
+
+            ViewBag.NombreCompletoPaciente = (paciente != null)
+                ? $"{paciente.pac_nombres} {paciente.pac_apellidos}"
+                : "Paciente no encontrado";
+
+            return View(orden);
+        }
         private List<SelectListItem> GetMedicos()
         {
             var medicos = Crud<Medicos>.GetAll();
@@ -39,6 +54,17 @@ namespace LIS.MVC.Controllers
             {
                 Value = e.Id.ToString(),
                 Text = $"{e.Id} {e.pac_nombres}"
+            }).ToList();
+        }
+
+
+        private List<SelectListItem> GetExamenes()
+        {
+            var examenes = Crud<Examenes>.GetAll();
+            return examenes.Select(e => new SelectListItem
+            {
+                Value = e.Id.ToString(),
+                Text = $"{e.Id} {e.exam_nombre}"
             }).ToList();
         }
         // GET: OrdenesController/Create

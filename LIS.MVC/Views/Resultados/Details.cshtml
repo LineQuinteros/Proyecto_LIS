@@ -1,48 +1,188 @@
 ﻿@model Modelos_LIS.Resultados
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Informe Clínico Oficial - LIS";
 }
 
-<h1>Details</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center d-print-none">
+            <h1 class="titulo-azul-elegante">Vista Previa del Informe</h1>
+            <p class="text-muted fw-bold small-caps">Use Ctrl + P para generar el documento oficial</p>
+        </header>
 
-<div>
-    <h4>Resultados</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.res_valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.res_valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.res_comentario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.res_comentario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OrdenId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OrdenId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExamenId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExamenId)
-        </dd>
-    </dl>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 850px;">
+            
+            <div class="d-flex justify-content-between align-items-center p-4 border-bottom bg-light-blue">
+                <div>
+                    <h3 class="text-primary-dark fw-bold m-0">@ViewBag.ExamenNombre</h3>
+                    <span class="badge-orden">ORDEN #@Model.OrdenId</span>
+                </div>
+                <div class="text-end">
+                    <p class="m-0 small fw-bold text-muted">FECHA DE EMISIÓN</p>
+                    <p class="m-0 fw-bold text-primary">@ViewBag.FechaOrden</p>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">PACIENTE / CÉDULA</label>
+                            <p class="value-text">@ViewBag.Paciente</p>
+                            <small class="text-muted">ID: @ViewBag.Cedula</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">MÉDICO SOLICITANTE</label>
+                            <p class="value-text">@ViewBag.Medico</p>
+                            <small class="text-muted">Prescripción Médica</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-highlight-card text-center mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 border-end border-print-dark">
+                            <label class="label-premium">VALOR OBTENIDO</label>
+                            <h2 class="display-4 fw-bold text-primary-dark m-0">@Model.res_valor <span class="fs-4">@ViewBag.Unidad</span></h2>
+                        </div>
+                        <div class="col-md-4 border-end border-print-dark">
+                            <label class="label-premium">RANGO DE REFERENCIA</label>
+                            <p class="fs-4 fw-bold text-muted m-0">@ViewBag.Referencia</p>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label-premium">ESTADO</label>
+                            <span class="badge-status-check">VALIDADO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-5">
+                    <div class="info-box-luxury bg-light">
+                        <label class="label-premium">OBSERVACIONES CLÍNICAS</label>
+                        <p class="fst-italic text-secondary">
+                            "@(string.IsNullOrEmpty(Model.res_comentario) ? "Sin observaciones adicionales." : Model.res_comentario)"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-none d-print-block mt-5 pt-5 text-center">
+                    <div style="width: 280px; margin: 0 auto; border-top: 2px solid #000; padding-top: 10px;">
+                        <p class="fw-bold m-0 text-dark">FIRMA DEL RESPONSABLE</p>
+                        <p class="small text-muted">Laboratorio Clínico LIS - FICA UTN</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center d-print-none mt-4">
+                    <a asp-action="Index" class="btn-regresar-minimal text-decoration-none shadow-sm">
+                        VOLVER AL LISTADO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    /* Estilos Base para Pantalla */
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        color: #1a237e;
+        font-weight: 700;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        overflow: hidden;
+    }
+
+    .info-box-luxury {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 5px solid #1a237e;
+    }
+
+    .label-premium {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .value-text {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1a237e;
+        margin: 0;
+    }
+
+    .result-highlight-card {
+        background: #f1f5f9;
+        padding: 30px;
+        border-radius: 20px;
+    }
+
+    .btn-regresar-minimal {
+        background: #1a237e;
+        color: white;
+        padding: 14px 50px;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+    }
+
+    .btn-regresar-minimal:hover {
+        background: #0d124d;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .badge-status-check {
+        background: #dcfce7;
+        color: #166534;
+        padding: 6px 15px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+
+    /* --- CONFIGURACIÓN PARA IMPRESIÓN (CTRL + P) --- */
+    @@media print {
+        .d-print-none, header, footer { display: none !important; }
+        .d-print-block { display: block !important; }
+        
+        .main-screen { background: white !important; }
+        .glass-card {
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+            width: 100% !important;
+            border-radius: 0 !important;
+        }
+
+        .result-highlight-card {
+            border: 2px solid #000 !important;
+            background: transparent !important;
+        }
+
+        .border-print-dark { border-color: #000 !important; }
+        .value-text, .text-primary-dark { color: black !important; }
+    }
+</style>

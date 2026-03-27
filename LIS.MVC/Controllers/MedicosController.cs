@@ -20,13 +20,24 @@ namespace LIS.MVC.Controllers
         }
 
         // GET: MedicosController/Details/5
+        // GET: MedicosController/Details/5
         public ActionResult Details(int id)
         {
-            var medico = Crud<Medicos >.GetById(id);
+            var medico = Crud<Medicos>.GetById(id);
             if (medico == null)
             {
                 return NotFound();
             }
+
+            // Buscamos todas las especialidades
+            var especialidades = Crud<Especialidades>.GetAll();
+
+            // Buscamos la especialidad específica del médico
+            var especialidadDelMedico = especialidades.FirstOrDefault(e => e.Id == medico.especialidadId);
+
+            // Pasamos el nombre al ViewBag para usarlo en la vista
+            ViewBag.NombreEspecialidad = especialidadDelMedico?.espe_nombre ?? "No asignada";
+
             return View(medico);
         }
 

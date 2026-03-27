@@ -21,10 +21,28 @@ namespace LIS.MVC.Controllers
         public ActionResult Details(int id)
         {
             var resultado = Crud<Resultados>.GetById(id);
-            if (resultado == null)
+            if (resultado == null) return NotFound();
+
+            // 1. Buscamos el Examen para ver rangos y nombre
+            var examen = Crud<Examenes>.GetById(resultado.ExamenId);
+
+            // 2. Buscamos la Orden para llegar al Paciente y Médico
+            var orden = Crud<Ordenes>.GetById(resultado.OrdenId);
+
+            if (orden != null)
             {
-                return NotFound();
+                var paciente = Crud<Pacientes>.GetById(orden.PacienteId);
+                var medico = Crud<Medicos>.GetById(orden.MedicoId);
+
+                ViewBag.Paciente = (paciente != null) ? $"{paciente.pac_nombres} {paciente.pac_apellidos}" : "N/A";
+                ViewBag.Cedula = (paciente != null) ? paciente.pac_cedula : "N/A";
+                ViewBag.Medico = (medico != null) ? $"{medico.med_nombres} {medico.med_apellidos}" : "N/A";
+                ViewBag.FechaOrden = orden.orden_fecha.ToString("dd/MM/yyyy");
             }
+
+            ViewBag.ExamenNombre = (examen != null) ? examen.exam_nombre : "Examen no encontrado";
+            ViewBag.Referencia = (examen != null) ? examen.exam_referencia : "N/A";
+
             return View(resultado);
         }
 

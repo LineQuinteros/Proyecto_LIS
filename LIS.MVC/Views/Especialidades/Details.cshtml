@@ -1,36 +1,165 @@
 ﻿@model Modelos_LIS.Especialidades
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de Especialidad - LIS";
 }
 
-<h1>Details</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Consulta de Especialidad</h1>
+            <p class="text-muted fw-bold">Información detallada del catálogo de servicios clínicos</p>
+        </header>
 
-<div>
-    <h4>Especialidades</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.espe_nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.espe_nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.espe_descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.espe_descripcion)
-        </dd>
-    </dl>
+        <div class="glass-card shadow-lg p-5 mx-auto" style="max-width: 700px;">
+            
+            <div class="d-flex align-items-center mb-5">
+                <div class="icon-circle-blue me-4">
+                    <i class="bi bi-info-square-fill"></i>
+                </div>
+                <div>
+                    <span class="id-tag-luxury">CÓDIGO DE SISTEMA: #@Model.Id</span>
+                    <h2 class="espe-title">@Model.espe_nombre</h2>
+                </div>
+            </div>
+
+            <hr class="my-4" style="opacity: 0.1;">
+
+            <div class="row info-display-grid">
+                
+                <div class="col-12 mb-4">
+                    <div class="detail-item shadow-sm p-3 rounded-4 bg-white bg-opacity-50">
+                        <label class="label-premium">
+                            <i class="bi bi-card-text me-2"></i>Descripción del Área
+                        </label>
+                        <p class="value-luxury mt-2">
+                            @(string.IsNullOrEmpty(Model.espe_descripcion) ? "Sin descripción detallada registrada." : Model.espe_descripcion)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="detail-item p-3 rounded-4 bg-white bg-opacity-25 border border-white">
+                        <label class="label-premium">Estado en el Catálogo</label>
+                        <p class="value-luxury small">
+                            <i class="bi bi-check-circle-fill text-success me-1"></i> Activa para Asignación
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 mt-5">
+                <a asp-action="Index" class="btn-regresar-minimal text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-arrow-left-circle me-2"></i>VOLVER AL LISTADO
+                </a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-editar-luxury text-decoration-none d-flex align-items-center">
+                    <i class="bi bi-pencil-square me-2"></i>EDITAR DATOS
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        margin-top: -24px;
+        background-attachment: fixed;
+    }
+
+    /* Tipografía Imperial */
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.2rem;
+        color: #1a237e;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .espe-title {
+        color: #1a237e;
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    /* Tarjeta Glassmorphism */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .icon-circle-blue {
+        width: 80px;
+        height: 80px;
+        background: #1a237e;
+        color: #fcf6ba;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        box-shadow: 0 10px 25px rgba(26, 35, 126, 0.2);
+    }
+
+    .id-tag-luxury {
+        color: #b59410;
+        font-weight: 800;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        display: block;
+    }
+
+    /* Etiquetas y Valores */
+    .label-premium {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .value-luxury {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #1e293b;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Botones */
+    .btn-editar-luxury {
+        background: linear-gradient(45deg, #bf953f, #fcf6ba);
+        color: #1a237e;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        box-shadow: 0 8px 20px rgba(181, 148, 16, 0.3);
+        transition: all 0.3s;
+    }
+
+    .btn-regresar-minimal {
+        background: #475569;
+        color: white;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        transition: all 0.3s;
+    }
+
+    .btn-editar-luxury:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(181, 148, 16, 0.4); color: #1a237e; }
+    .btn-regresar-minimal:hover { background: #1e293b; color: white; transform: scale(1.02); }
+</style>

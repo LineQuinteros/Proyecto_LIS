@@ -1,42 +1,165 @@
 ﻿@model Modelos_LIS.Examenes
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Examen - LIS";
 }
 
-<h1>Details</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Ficha Técnica del Examen</h1>
+            <p class="text-muted fw-bold small-caps">Consulta de Parámetros Configurados</p>
+        </header>
 
-<div>
-    <h4>Examenes</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.exam_nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.exam_nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.exam_unidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.exam_unidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.exam_referencia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.exam_referencia)
-        </dd>
-    </dl>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 750px;">
+            <div class="card-header-luxury d-flex align-items-center p-4">
+                <div class="id-badge me-4">
+                    <span class="d-block small">ID</span>
+                    <span class="h4 m-0 fw-bold">#@Model.Id</span>
+                </div>
+                <div>
+                    <h2 class="m-0 text-white fw-bold">@Model.exam_nombre</h2>
+                    <span class="text-white-50 small">Parámetro de Laboratorio Clínico</span>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Unidad de Medida</label>
+                            <p class="value-text">@Model.exam_unidad</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Valor de Referencia</label>
+                            <p class="value-text">@Model.exam_referencia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn-regresar-minimal">
+                        VOLVER A LA LISTA
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-editar-luxury">
+                        EDITAR INFORMACIÓN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        margin-top: -24px;
+        background-attachment: fixed;
+    }
+
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.2rem;
+        color: #1a237e;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .small-caps {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        overflow: hidden;
+    }
+
+    .card-header-luxury {
+        background: #1a237e;
+        border-bottom: 4px solid #fcf6ba; /* Línea dorada */
+    }
+
+    .id-badge {
+        background: rgba(252, 246, 186, 0.2);
+        color: #fcf6ba;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(252, 246, 186, 0.3);
+        text-align: center;
+    }
+
+    .info-box-luxury {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    .label-premium {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .value-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #1a237e;
+        margin: 0;
+    }
+
+    /* BOTONES */
+    .btn-editar-luxury {
+        background: #1a237e;
+        color: white;
+        text-decoration: none;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+
+        .btn-editar-luxury:hover {
+            background: #0d124d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+            color: white;
+        }
+
+    .btn-regresar-minimal {
+        background: #64748b;
+        color: white;
+        text-decoration: none;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+
+        .btn-regresar-minimal:hover {
+            background: #475569;
+            color: white;
+        }
+</style>

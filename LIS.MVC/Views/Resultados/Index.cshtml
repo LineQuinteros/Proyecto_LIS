@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Modelos_LIS.Resultados>
 
 @{
-    ViewData["Title"] = "Resultados de Exámenes";
+    ViewData["Title"] = "Historial de Resultados";
 }
 
 <div class="main-screen">
@@ -10,8 +10,9 @@
         <header class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h1 class="titulo-dorado-premium">Resultados de Exámenes</h1>
+                <p class="text-muted fw-bold small-caps ms-2">Registro Histórico de Análisis Clínicos</p>
             </div>
-            <a asp-action="Create" class="btn-luxury">
+            <a asp-action="Create" class="btn-luxury shadow-sm">
                 <span>+ NUEVO RESULTADO</span>
             </a>
         </header>
@@ -20,43 +21,41 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th class="py-4 ps-4">@Html.DisplayNameFor(model => model.Id)</th>
+                        <th class="py-4 ps-4">ID</th>
                         <th class="py-4">Cédula</th>
                         <th class="py-4">Examen</th>
-                        <th class="py-4">Valor</th>
+                        <th class="py-4 text-center">Valor</th>
                         <th class="py-4">Referencia</th>
                         <th class="py-4">Orden</th>
-                        <th class="py-4 text-end pe-4">GESTIÓN</th>
+                        <th class="py-4 text-end pe-5">REPORTE</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr class="luxury-row">
-                            <td class="ps-4">
+                            <td class="ps-4 align-middle">
                                 <span class="id-tag-small">#@item.Id</span>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-muted small fw-bold">@item.Orden.Paciente.pac_cedula</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="espe-nombre-refined">@item.Examen.exam_nombre</div>
                             </td>
-                            <td>
+                            <td class="align-middle text-center">
                                 <div class="resultado-valor">@item.res_valor</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-muted small italic">@item.Examen.exam_referencia</div>
                             </td>
-                            <td>
-                                <div class="text-dark small">ID Orden: #@item.OrdenId</div>
+                            <td class="align-middle">
+                                <div class="text-dark small fw-bold">ID Orden: #@item.OrdenId</div>
                             </td>
-                            <td class="text-end pe-4">
-                                <div class="action-links">
-                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="link-edit">Editar</a>
-                                    <a href="@Url.Action("Details", new { id = item.Id })" class="link-view">Ver</a>
-                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="link-delete">Borrar</a>
-                                </div>
+                            <td class="text-end pe-4 align-middle">
+                                <a href="@Url.Action("Details", new { id = item.Id })" class="btn-ver-reporte">
+                                    VER INFORME
+                                </a>
                             </td>
                         </tr>
                     }
@@ -67,8 +66,7 @@
 </div>
 
 <style>
-    /* Importación de fuentes */
-    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
     body {
         background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
@@ -77,62 +75,61 @@
         background-attachment: fixed;
     }
 
-    /* TÍTULO: Champagne Gold con Playfair Display */
     .titulo-dorado-premium {
         font-family: 'Playfair Display', serif;
-        font-size: 3.8rem;
+        font-size: 3.5rem;
         font-weight: 700;
-        letter-spacing: -1px;
         background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
-        filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
     }
 
-    /* Ajuste para el valor del resultado */
-    .resultado-valor {
-        font-weight: 700;
-        color: #1a237e;
-        font-size: 1.1rem;
-        background: rgba(26, 35, 126, 0.05);
-        padding: 4px 10px;
-        border-radius: 6px;
-        display: inline-block;
+    .small-caps {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #1a237e !important;
     }
 
-    /* Tamaños ajustados solicitado */
-    .id-tag-small {
-        color: #b59410;
-        font-weight: 700;
-        font-size: 0.8rem;
-    }
-
-    .espe-nombre-refined {
-        font-weight: 700;
-        color: #1a237e;
-        font-size: 1.05rem;
-    }
-
-    /* Card Glassmorphism */
     .glass-card {
-        background: rgba(255, 255, 255, 0.75);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
+        border-radius: 25px;
         overflow: hidden;
     }
 
     .luxury-row {
         transition: all 0.3s ease;
-        border-left: 5px solid transparent;
+        border-bottom: 1px solid rgba(0,0,0,0.03) !important;
     }
 
-    .luxury-row:hover {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border-left: 5px solid #b59410;
-        transform: translateX(5px);
+        .luxury-row:hover {
+            background: rgba(255, 255, 255, 1) !important;
+            transform: scale(1.002);
+        }
+
+    .resultado-valor {
+        font-weight: 800;
+        color: #1a237e;
+        font-size: 1.1rem;
+        background: rgba(26, 35, 126, 0.08);
+        padding: 5px 15px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .id-tag-small {
+        color: #b59410;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+
+    .espe-nombre-refined {
+        font-weight: 700;
+        color: #1a237e;
+        font-size: 1rem;
     }
 
     .table thead th {
@@ -141,32 +138,39 @@
         letter-spacing: 1.5px;
         font-weight: 700;
         color: #64748b;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background: rgba(248, 250, 252, 0.5);
     }
 
-    .action-links a {
+    .btn-ver-reporte {
         text-decoration: none;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-left: 15px;
-        text-transform: uppercase;
-        transition: opacity 0.2s;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 10px 25px;
+        border-radius: 50px;
+        background: #1a237e;
+        color: white !important;
+        transition: all 0.3s;
+        display: inline-block;
+        border: none;
     }
 
-    .link-edit { color: #3b82f6; }
-    .link-view { color: #64748b; }
-    .link-delete { color: #ef4444; }
+        .btn-ver-reporte:hover {
+            background: #0d124d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+        }
 
     .btn-luxury {
         background: #1a237e;
-        color: white;
-        text-decoration: none;
-        padding: 12px 30px;
+        color: white !important;
+        padding: 14px 30px;
         border-radius: 50px;
         font-weight: 700;
-        font-size: 0.75rem;
-        transition: all 0.3s ease;
+        font-size: 0.8rem;
+        text-decoration: none;
     }
 
-    .italic { font-style: italic; }
+    .italic {
+        font-style: italic;
+    }
 </style>

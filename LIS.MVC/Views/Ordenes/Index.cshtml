@@ -10,6 +10,7 @@
         <header class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h1 class="titulo-dorado-premium">Órdenes de Laboratorio</h1>
+                <p class="text-muted fw-bold small-caps ms-2">Control y Seguimiento de Análisis Clínicos</p>
             </div>
             <a asp-action="Create" class="btn-luxury">
                 <span>+ NUEVA ORDEN</span>
@@ -20,26 +21,27 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th class="py-4 ps-4">@Html.DisplayNameFor(model => model.Id)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.orden_fecha)</th>
-                        <th class="py-4 text-center">Estado</th>
-                        <th class="py-4">Médico</th>
+                        <th class="py-4 ps-4">ID</th>
+                        <th class="py-4">Fecha de Emisión</th>
+                        <th class="py-4 text-center">Estado de Análisis</th>
+                        <th class="py-4">Médico Solicitante</th>
                         <th class="py-4">Paciente</th>
-                        <th class="py-4 text-end pe-4">GESTIÓN</th>
+                        <th class="py-4 text-end pe-5">GESTIÓN</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr class="luxury-row">
-                            <td class="ps-4">
+                            <td class="ps-4 align-middle">
                                 <span class="id-tag-small">#@item.Id</span>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-dark small fw-semibold">@item.orden_fecha.ToShortDateString()</div>
+                                <div class="text-muted tiny">Registro oficial</div>
                             </td>
-                            <td class="text-center">
-                                @if (item.orden_estado) // Asumiendo que es un booleano
+                            <td class="text-center align-middle">
+                                @if (item.orden_estado)
                                 {
                                     <span class="status-badge-complete">
                                         <i class="bi bi-check-circle-fill"></i> Completado
@@ -52,17 +54,16 @@
                                     </span>
                                 }
                             </td>
-                            <td>
-                                <div class="espe-nombre-refined">@item.Medico.med_nombres</div>
+                            <td class="align-middle">
+                                <div class="espe-nombre-refined">@item.Medico.med_nombres @item.Medico.med_apellidos</div>
                             </td>
-                            <td>
-                                <div class="espe-nombre-refined">@item.Paciente.pac_nombres</div>
+                            <td class="align-middle">
+                                <div class="espe-nombre-refined">@item.Paciente.pac_nombres @item.Paciente.pac_apellidos</div>
                             </td>
-                            <td class="text-end pe-4">
+                            <td class="text-end pe-4 align-middle">
                                 <div class="action-links">
                                     <a href="@Url.Action("Edit", new { id = item.Id })" class="link-edit">Editar</a>
                                     <a href="@Url.Action("Details", new { id = item.Id })" class="link-view">Ver</a>
-                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="link-delete">Borrar</a>
                                 </div>
                             </td>
                         </tr>
@@ -97,7 +98,13 @@
         filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
     }
 
-    /* ESTILOS DE ESTADO (Badges) */
+    .small-caps {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #1a237e !important;
+    }
+
     .status-badge-complete {
         background: rgba(25, 135, 84, 0.1);
         color: #198754;
@@ -130,6 +137,8 @@
         font-size: 1.05rem;
     }
 
+    .tiny { font-size: 0.65rem; }
+
     .glass-card {
         background: rgba(255, 255, 255, 0.75);
         backdrop-filter: blur(12px);
@@ -161,19 +170,24 @@
 
     .action-links a {
         text-decoration: none;
-        font-size: 0.8rem;
-        font-weight: 600;
+        font-size: 0.75rem;
+        font-weight: 700;
         margin-left: 15px;
         text-transform: uppercase;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.2s;
     }
 
     .link-edit { color: #3b82f6; }
-    .link-view { color: #64748b; }
-    .link-delete { color: #ef4444; }
+    .link-edit:hover { background: rgba(59, 130, 246, 0.1); }
+
+    .link-view { color: #1a237e; }
+    .link-view:hover { background: rgba(26, 35, 126, 0.1); }
 
     .btn-luxury {
         background: #1a237e;
-        color: white;
+        color: white !important;
         text-decoration: none;
         padding: 12px 30px;
         border-radius: 50px;

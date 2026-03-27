@@ -1,54 +1,195 @@
 ﻿@model Modelos_LIS.Pacientes
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Expediente del Paciente - LIS";
 }
 
-<h1>Details</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Información del Paciente</h1>
+            <p class="text-muted fw-bold small-caps">Información Detallada del Paciente</p>
+        </header>
 
-<div>
-    <h4>Pacientes</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pac_cedula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pac_cedula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pac_nombres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pac_nombres)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pac_apellidos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pac_apellidos)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pac_telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pac_telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.pac_correo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.pac_correo)
-        </dd>
-    </dl>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 800px;">
+            <div class="text-center p-4 border-bottom bg-light-blue">
+                <div class="icon-circle-blue">
+                    <span class="initials">@Model.pac_nombres.Substring(0, 1)@Model.pac_apellidos.Substring(0, 1)</span>
+                </div>
+                <h2 class="text-primary-dark fw-bold m-0 mt-3">@Model.pac_nombres @Model.pac_apellidos</h2>
+                <span class="badge-id">ID DE REGISTRO: @Model.Id</span>
+            </div>
+
+            <div class="p-5">
+                <div class="row g-4">
+                    
+                    <div class="col-md-6">
+                        <div class="info-box-luxury h-100">
+                            <label class="label-premium">Documento de Identidad</label>
+                            <p class="value-text">@Model.pac_cedula</p>
+                            <small class="text-muted">Cédula Ciudadana</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box-luxury h-100">
+                            <label class="label-premium">Teléfono de Contacto</label>
+                            <p class="value-text">@Model.pac_telefono</p>
+                            <small class="text-muted">Móvil / Convencional</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Correo Electrónico</label>
+                            <p class="value-text" style="font-size: 1.1rem;">@Model.pac_correo</p>
+                            <small class="text-muted">Notificaciones de Resultados</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-5" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn-regresar-minimal text-decoration-none">
+                        VOLVER AL LISTADO
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-editar-luxury text-decoration-none">
+                        EDITAR INFORMACIÓN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        margin-top: -24px;
+        background-attachment: fixed;
+    }
+
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: #1a237e;
+        font-weight: 700;
+    }
+
+    .small-caps {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        overflow: hidden;
+    }
+
+    .icon-circle-blue {
+        width: 80px;
+        height: 80px;
+        background: #1a237e;
+        border-radius: 50%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+    }
+
+    .initials {
+        color: #fcf6ba;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .badge-id {
+        display: inline-block;
+        background: #fcf6ba;
+        color: #1a237e;
+        padding: 5px 20px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.7rem;
+        margin-top: 15px;
+    }
+
+    .info-box-luxury {
+        background: white;
+        padding: 20px 25px;
+        border-radius: 20px;
+        border-left: 6px solid #1a237e;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        transition: transform 0.3s;
+    }
+
+        .info-box-luxury:hover {
+            transform: translateY(-5px);
+        }
+
+    .label-premium {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .value-text {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a237e;
+        margin: 0;
+    }
+
+    .btn-editar-luxury {
+        background: #1a237e;
+        color: white;
+        padding: 14px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+
+        .btn-editar-luxury:hover {
+            background: #0d124d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(26, 35, 126, 0.3);
+            color: white;
+        }
+
+    .btn-regresar-minimal {
+        background: #64748b;
+        color: white;
+        padding: 14px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+
+        .btn-regresar-minimal:hover {
+            background: #475569;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .text-primary-dark {
+        color: #1a237e;
+    }
+</style>

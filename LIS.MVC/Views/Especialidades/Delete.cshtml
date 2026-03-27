@@ -1,38 +1,169 @@
 ﻿@model Modelos_LIS.Especialidades
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Especialidad - LIS";
 }
 
-<h1>Delete</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-rojo-elegante">Confirmar Eliminación</h1>
+            <p class="text-muted fw-bold small-caps">Atención: Esta acción puede afectar la clasificación de los médicos</p>
+        </header>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Especialidades</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.espe_nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.espe_nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.espe_descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.espe_descripcion)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 700px;">
+            
+            <div class="text-center p-4 border-bottom bg-light-danger">
+                <div class="icon-circle-danger">
+                    <i class="bi bi-shield-exclamation"></i>
+                </div>
+                <h3 class="text-danger-dark fw-bold m-0 mt-3">¿Eliminar esta Especialidad?</h3>
+                <span class="badge-warning-custom">REVISIÓN DE SEGURIDAD</span>
+            </div>
+
+            <div class="p-5">
+                <div class="info-card-preview mb-5">
+                    <div class="row g-4">
+                        <div class="col-12 border-bottom pb-3">
+                            <label class="label-premium">Nombre de la Especialidad</label>
+                            <p class="value-text-big">@Model.espe_nombre</p>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="label-premium">Descripción del Área</label>
+                            <p class="value-text-description">
+                                @(string.IsNullOrEmpty(Model.espe_descripcion) ? "Sin descripción registrada." : Model.espe_descripcion)
+                            </p>
+                        </div>
+
+                        <div class="col-12 mt-2">
+                            <label class="label-premium">Identificador del Sistema</label>
+                            <p class="text-muted small fw-bold">ID Registro: #@Model.Id</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form asp-action="Delete">
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-action="Index" class="btn-regresar-minimal text-decoration-none">
+                            CANCELAR Y VOLVER
+                        </a>
+                        <button type="submit" class="btn-delete-luxury">
+                            CONFIRMAR ELIMINACIÓN
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    .titulo-rojo-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        color: #991b1b;
+        font-weight: 700;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        overflow: hidden;
+    }
+
+    .icon-circle-danger {
+        width: 60px;
+        height: 60px;
+        background: #ef4444;
+        border-radius: 50%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    .info-card-preview {
+        background: #fff5f5;
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid #fee2e2;
+    }
+
+    .label-premium {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #94a3b8;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .value-text-big {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .value-text-description {
+        font-size: 1rem;
+        font-style: italic;
+        color: #475569;
+        line-height: 1.6;
+    }
+
+    .btn-delete-luxury {
+        background: #ef4444;
+        color: white !important;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        border: none;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-delete-luxury:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+        }
+
+    .btn-regresar-minimal {
+        background: #64748b;
+        color: white !important;
+        padding: 14px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .badge-warning-custom {
+        display: inline-block;
+        background: #fef2f2;
+        color: #b91c1c;
+        padding: 4px 15px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.7rem;
+        border: 1px solid #fee2e2;
+        margin-top: 10px;
+    }
+</style>

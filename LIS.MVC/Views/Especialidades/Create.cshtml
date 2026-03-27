@@ -1,39 +1,175 @@
 ﻿@model Modelos_LIS.Especialidades
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nueva Especialidad - LIS";
 }
 
-<h1>Create</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Nueva Especialidad</h1>
+            <p class="text-muted fw-bold">Ingrese la información de la especialidad médica para el laboratorio.</p>
+        </header>
 
-<h4>Especialidades</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="espe_nombre" class="control-label"></label>
-                <input asp-for="espe_nombre" class="form-control" />
-                <span asp-validation-for="espe_nombre" class="text-danger"></span>
+        <div class="glass-card shadow-lg p-5 mx-auto" style="max-width: 600px;">
+            <div class="text-center mb-4">
+                <div class="icon-circle-blue">
+                    <i class="bi bi-plus-circle-fill"></i>
+                </div>
+                <h3 class="text-primary-dark fw-bold">Registrar Especialidad</h3>
             </div>
-            <div class="form-group">
-                <label asp-for="espe_descripcion" class="control-label"></label>
-                <input asp-for="espe_descripcion" class="form-control" />
-                <span asp-validation-for="espe_descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert-error-luxury mb-4"></div>
+
+                <div class="form-group-luxury mb-4">
+                    <label asp-for="espe_nombre" class="label-premium">
+                        <i class="bi bi-tag me-2"></i>NOMBRE DE LA ESPECIALIDAD
+                    </label>
+                    <input asp-for="espe_nombre" class="input-luxury" placeholder="Ej: Hematología, Bioquímica..." />
+                    <span asp-validation-for="espe_nombre" class="text-danger small fw-bold"></span>
+                </div>
+
+                <div class="form-group-luxury mb-5">
+                    <label asp-for="espe_descripcion" class="label-premium">
+                        <i class="bi bi-card-text me-2"></i>DESCRIPCIÓN BREVE
+                    </label>
+                    <textarea asp-for="espe_descripcion" class="input-luxury" rows="3" placeholder="Breve detalle del área..."></textarea>
+                    <span asp-validation-for="espe_descripcion" class="text-danger small fw-bold"></span>
+                </div>
+
+                <hr class="my-4" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn-regresar-minimal">CANCELAR</a>
+                    <button type="submit" class="btn-guardar-blue">
+                        <i class="bi bi-check-circle me-2"></i>GUARDAR ESPECIALIDAD
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        margin-top: -24px; /* Ajuste por si el layout tiene padding */
+    }
+
+    /* Tipografía Imperial */
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        color: #1a237e;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .text-primary-dark {
+        color: #1a237e;
+    }
+
+    /* Tarjeta Glassmorphism */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .icon-circle-blue {
+        width: 70px;
+        height: 70px;
+        background: #1a237e;
+        color: #fcf6ba; /* Dorado Champagne */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        box-shadow: 0 8px 20px rgba(26, 35, 126, 0.2);
+    }
+
+    /* Estilo de Inputs */
+    .label-premium {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .input-luxury {
+        width: 100%;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+
+        .input-luxury:focus {
+            border-color: #1a237e;
+            outline: none;
+            box-shadow: 0 0 10px rgba(26, 35, 126, 0.1);
+        }
+
+    /* Botones */
+    .btn-guardar-blue {
+        background: #1a237e;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+
+    .btn-regresar-minimal {
+        background: #64748b;
+        color: white;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .btn-guardar-blue:hover {
+        background: #0d124d;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+    }
+
+    .btn-regresar-minimal:hover {
+        background: #475569;
+        color: white;
+    }
+
+    .alert-error-luxury {
+        background: #fff5f5;
+        color: #c53030;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        border-left: 5px solid #c53030;
+    }
+</style>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

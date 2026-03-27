@@ -1,53 +1,212 @@
 ﻿@model Modelos_LIS.Ordenes
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Orden - LIS";
 }
 
-<h1>Edit</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Modificar Orden Médica</h1>
+            <p class="text-muted fw-bold small-caps">Actualización de Registros de Laboratorio</p>
+        </header>
 
-<h4>Ordenes</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
-            <div class="form-group">
-                <label asp-for="orden_fecha" class="control-label"></label>
-                <input asp-for="orden_fecha" class="form-control" />
-                <span asp-validation-for="orden_fecha" class="text-danger"></span>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 750px;">
+            <div class="text-center p-4 border-bottom bg-light-blue">
+                <div class="icon-circle-blue">
+                </div>
+                <h3 class="text-primary-dark fw-bold m-0 mt-3">Orden #@Model.Id</h3>
+                <span class="badge-edicion">MODO EDICIÓN</span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="orden_estado" /> @Html.DisplayNameFor(model => model.orden_estado)
-                </label>
+
+            <div class="p-5">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-group-luxury">
+                                <label asp-for="orden_fecha" class="label-premium">Fecha de Emisión</label>
+                                <input asp-for="orden_fecha" class="input-luxury" type="date" />
+                                <span asp-validation-for="orden_fecha" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                            <div class="form-check form-switch custom-switch-luxury">
+                                <input class="form-check-input" type="checkbox" asp-for="orden_estado" id="switchEstado">
+                                    <label class="form-check-label fw-bold text-primary-dark ms-2" for="switchEstado">
+                                        ¿ORDEN COMPLETADA?
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group-luxury">
+                                    <label asp-for="MedicoId" class="label-premium">Médico Solicitante</label>
+                                    <select asp-for="MedicoId" class="select-luxury" asp-items="ViewBag.Medicos">
+                                        <option value="">-- Seleccione el profesional responsable --</option>
+                                    </select>
+                                    <span asp-validation-for="MedicoId" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group-luxury">
+                                    <label asp-for="PacienteId" class="label-premium">Paciente</label>
+                                    <select asp-for="PacienteId" class="select-luxury" asp-items="ViewBag.Pacientes">
+                                        <option value="">-- Seleccione el paciente --</option>
+                                    </select>
+                                    <span asp-validation-for="PacienteId" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-5" style="opacity: 0.1;">
+
+                        <div class="d-flex justify-content-center gap-3 mt-4">
+                            <a asp-action="Index" class="btn-regresar-minimal text-decoration-none">
+                                CANCELAR
+                            </a>
+                            <button type="submit" class="btn-guardar-luxury">
+                                ACTUALIZAR ORDEN
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="MedicoId" class="control-label"></label>
-                <select asp-for="MedicoId" class="form-control" asp-items="ViewBag.Medicos">
-                    <option value="">-- Seleccione un médico --</option>
-                </select>
-                <span asp-validation-for="MedicoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PacienteId" class="control-label"></label>
-                <select asp-for="PacienteId" class="form-control" asp-items="ViewBag.Pacientes">
-                    <option value="">-- Seleccione un paciente --</option>
-                </select>
-                <span asp-validation-for="PacienteId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        .main-screen {
+            background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            margin-top: -24px;
+            background-attachment: fixed;
+        }
+
+        .titulo-azul-elegante {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #1a237e;
+            font-weight: 700;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .icon-circle-blue {
+            width: 60px;
+            height: 60px;
+            background: #1a237e;
+            border-radius: 50%;
+            margin: 0 auto;
+            box-shadow: 0 8px 20px rgba(26, 35, 126, 0.2);
+        }
+
+        .badge-edicion {
+            display: inline-block;
+            background: #fcf6ba;
+            color: #1a237e;
+            padding: 4px 15px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.7rem;
+            margin-top: 10px;
+        }
+
+        .label-premium {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #64748b;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+            padding-left: 5px;
+        }
+
+        .input-luxury, .select-luxury {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 15px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            color: #1e293b;
+            font-weight: 600;
+            transition: all 0.3s;
+            appearance: none; /* Quita el estilo por defecto en algunos navegadores */
+        }
+
+        .select-luxury {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231a237e' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            background-size: 1rem;
+        }
+
+            .input-luxury:focus, .select-luxury:focus {
+                outline: none;
+                border-color: #1a237e;
+                background: white;
+                box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+            }
+
+        /* Estilo para el switch de estado */
+        .custom-switch-luxury .form-check-input {
+            width: 3rem;
+            height: 1.5rem;
+            cursor: pointer;
+        }
+
+            .custom-switch-luxury .form-check-input:checked {
+                background-color: #1a237e;
+                border-color: #1a237e;
+            }
+
+        .btn-guardar-luxury {
+            background: #1a237e;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+            .btn-guardar-luxury:hover {
+                background: #0d124d;
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px rgba(26, 35, 126, 0.3);
+            }
+
+        .btn-regresar-minimal {
+            background: #64748b;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .text-primary-dark {
+            color: #1a237e;
+        }
+    </style>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

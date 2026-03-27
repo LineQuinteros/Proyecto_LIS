@@ -1,66 +1,187 @@
 ﻿@model Modelos_LIS.Medicos
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Ficha del Médico - LIS";
 }
 
-<h1>Details</h1>
+<div class="main-screen">
+    <div class="container py-5">
+        
+        <header class="mb-5 text-center">
+            <h1 class="titulo-azul-elegante">Perfil del Profesional</h1>
+            <p class="text-muted fw-bold small-caps">Consulta Detallada de Registro Médico</p>
+        </header>
 
-<div>
-    <h4>Medicos</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_cedula)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_cedula)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_nombres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_nombres)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_apellidos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_apellidos)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_telefono)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_correo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_correo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.med_password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.med_password)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.especialidadId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.especialidadId)
-        </dd>
-    </dl>
+        <div class="glass-card shadow-lg mx-auto" style="max-width: 850px;">
+            
+            <div class="p-4 border-bottom bg-light-blue d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="avatar-placeholder me-3">
+                        <span class="fs-2 fw-bold text-white">@Model.med_nombres.Substring(0, 1)@Model.med_apellidos.Substring(0, 1)</span>
+                    </div>
+                    <div>
+                        <h3 class="text-primary-dark fw-bold m-0">@Model.med_nombres @Model.med_apellidos</h3>
+                        <span class="id-tag-small">ID MÉDICO: #@Model.Id</span>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <span class="badge-especialidad-premium">
+                        @(ViewBag.NombreEspecialidad ?? "General")
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Documento de Identidad</label>
+                            <p class="value-text">@Model.med_cedula</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Área / Especialidad</label>
+                            <p class="value-text">@(ViewBag.NombreEspecialidad ?? "No asignada")</p>
+                            <small class="text-muted">ID Especialidad: @Model.especialidadId</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Teléfono de Contacto</label>
+                            <p class="value-text">@Model.med_telefono</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box-luxury">
+                            <label class="label-premium">Correo Institucional</label>
+                            <p class="value-text">@Model.med_correo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5" style="opacity: 0.1;">
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="Index" class="btn-regresar-minimal text-decoration-none">
+                        VOLVER AL LISTADO
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-editar-luxury text-decoration-none">
+                        EDITAR PERFIL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    .main-screen {
+        background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
+        font-family: 'Montserrat', sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
+
+    .titulo-azul-elegante {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        color: #1a237e;
+        font-weight: 700;
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(15px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        overflow: hidden;
+    }
+
+    /* Avatar con iniciales */
+    .avatar-placeholder {
+        width: 70px;
+        height: 70px;
+        background: #b59410;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 15px rgba(181, 148, 16, 0.2);
+    }
+
+    .info-box-luxury {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        border-left: 5px solid #1a237e;
+        transition: transform 0.3s ease;
+    }
+
+        .info-box-luxury:hover {
+            transform: translateY(-5px);
+        }
+
+    .label-premium {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .value-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1a237e;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    .badge-especialidad-premium {
+        background: #1a237e;
+        color: #fcf6ba;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        box-shadow: 0 4px 10px rgba(26, 35, 126, 0.2);
+    }
+
+    .btn-editar-luxury {
+        background: #1a237e;
+        color: white !important;
+        padding: 12px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: all 0.3s;
+    }
+
+        .btn-editar-luxury:hover {
+            background: #0d124d;
+            box-shadow: 0 8px 15px rgba(26, 35, 126, 0.3);
+        }
+
+    .btn-regresar-minimal {
+        background: #64748b;
+        color: white !important;
+        padding: 12px 35px;
+        border-radius: 50px;
+        font-weight: 700;
+    }
+
+    .id-tag-small {
+        color: #b59410;
+        font-weight: 700;
+        font-size: 0.8rem;
+    }
+
+    .text-primary-dark {
+        color: #1a237e;
+    }
+</style>

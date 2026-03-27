@@ -10,6 +10,7 @@
         <header class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h1 class="titulo-dorado-premium">Registro de Pacientes</h1>
+                <p class="text-muted fw-bold small-caps ms-2">Base de Datos de Usuarios del Sistema</p>
             </div>
             <a asp-action="Create" class="btn-luxury">
                 <span>+ NUEVO REGISTRO</span>
@@ -20,42 +21,41 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th class="py-4 ps-4">@Html.DisplayNameFor(model => model.Id)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.pac_cedula)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.pac_nombres)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.pac_apellidos)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.pac_telefono)</th>
-                        <th class="py-4">@Html.DisplayNameFor(model => model.pac_correo)</th>
-                        <th class="py-4 text-end pe-4">GESTIÓN</th>
+                        <th class="py-4 ps-4">ID</th>
+                        <th class="py-4">Cédula</th>
+                        <th class="py-4">Nombres</th>
+                        <th class="py-4">Apellidos</th>
+                        <th class="py-4">Teléfono</th>
+                        <th class="py-4">Correo</th>
+                        <th class="py-4 text-end pe-5">GESTIÓN</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr class="luxury-row">
-                            <td class="ps-4">
+                            <td class="ps-4 align-middle">
                                 <span class="id-tag-small">#@item.Id</span>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-dark small fw-semibold">@item.pac_cedula</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="espe-nombre-refined">@item.pac_nombres</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="espe-nombre-refined">@item.pac_apellidos</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-muted small">@item.pac_telefono</div>
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <div class="text-muted small">@item.pac_correo</div>
                             </td>
-                            <td class="text-end pe-4">
+                            <td class="text-end pe-4 align-middle">
                                 <div class="action-links">
                                     <a href="@Url.Action("Edit", new { id = item.Id })" class="link-edit">Editar</a>
                                     <a href="@Url.Action("Details", new { id = item.Id })" class="link-view">Ver</a>
-                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="link-delete">Borrar</a>
                                 </div>
                             </td>
                         </tr>
@@ -67,18 +67,17 @@
 </div>
 
 <style>
-    /* Importación de fuentes: Montserrat y Playfair Display */
+    /* Importación de fuentes */
     @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
 
     body {
-        /* Mantenemos tu fondo azul/celeste clínico */
         background: linear-gradient(183deg, rgba(218, 223, 235, 0.93) 15%, rgba(100, 109, 158, 1) 100%);
         font-family: 'Montserrat', sans-serif;
         min-height: 100vh;
         background-attachment: fixed;
     }
 
-    /* TÍTULO: Champagne Gold con Playfair Display */
+    /* TÍTULO: Champagne Gold */
     .titulo-dorado-premium {
         font-family: 'Playfair Display', serif;
         font-size: 3.8rem;
@@ -91,7 +90,13 @@
         filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
     }
 
-    /* Tamaños ajustados (Un punto menos) */
+    .small-caps {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #1a237e !important;
+    }
+
     .id-tag-small {
         color: #b59410;
         font-weight: 700;
@@ -101,7 +106,7 @@
     .espe-nombre-refined {
         font-weight: 700;
         color: #1a237e;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     /* Card Glassmorphism */
@@ -114,7 +119,6 @@
         overflow: hidden;
     }
 
-    /* Efectos de fila */
     .luxury-row {
         transition: all 0.3s ease;
         border-left: 5px solid transparent;
@@ -126,7 +130,6 @@
         transform: translateX(5px);
     }
 
-    /* Encabezados de tabla en Montserrat */
     .table thead th {
         font-size: 0.7rem;
         text-transform: uppercase;
@@ -136,21 +139,32 @@
         border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
-    /* Acciones: Texto limpio sin recuadros */
+    /* Acciones: Texto limpio */
     .action-links a {
         text-decoration: none;
-        font-size: 0.8rem;
-        font-weight: 600;
+        font-size: 0.75rem;
+        font-weight: 700;
         margin-left: 15px;
         text-transform: uppercase;
-        transition: opacity 0.2s;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: all 0.2s;
     }
 
-    .link-edit { color: #3b82f6; }
-    .link-view { color: #64748b; }
-    .link-delete { color: #ef4444; }
+    .link-edit { 
+        color: #3b82f6; 
+    }
+    .link-edit:hover {
+        background: rgba(59, 130, 246, 0.1);
+    }
 
-    /* Botón de Registro Estilo Montserrat */
+    .link-view { 
+        color: #1a237e; 
+    }
+    .link-view:hover {
+        background: rgba(26, 35, 126, 0.1);
+    }
+
     .btn-luxury {
         background: #1a237e;
         color: white;
@@ -160,11 +174,5 @@
         font-weight: 700;
         font-size: 0.75rem;
         transition: all 0.3s ease;
-    }
-
-    .btn-luxury:hover {
-        background: #0d124d;
-        color: white;
-        transform: translateY(-2px);
     }
 </style>
